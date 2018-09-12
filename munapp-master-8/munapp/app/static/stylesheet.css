@@ -1,0 +1,29 @@
+.navbar-default {
+  background-color:#910038;
+  font-color: #ffffff;
+  background-image: none;
+  background-repeat: no-repeat;
+}
+.navbar-default .navbar-nav > li > a {
+  color:#ffffff;
+}
+
+.navbar-default .navbar-brand {
+  color:#ffffff;
+}
+
+.navbar-default .navbar-nav > p {
+  color:#ffffff;
+}
+
+}
+
+body {
+   background-image: url("http://www.mun.ca/marcomm/brand/standards/logos/MUN_Logo_RGB.png");
+   background-color: #cccccc;
+}
+
+.content {
+   background-image: url("http://www.mun.ca/marcomm/brand/standards/logos/MUN_Logo_RGB.png");
+   background-color: #cccccc;
+}

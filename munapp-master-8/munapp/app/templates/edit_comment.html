@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block extend_content %}
+<div class ="container">
+	<div class ="well">
+		<form action="" method="post">
+			{{ form.csrf_token }}
+            {{ wtf.form_field(form.comment)}}
+            {{ wtf.form_field(form.submit)}}
+		</form>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - munapp</title>
+        {% else %}
+        <title>munapp</title>
+        {% endif %}
+        <style>
+            div.inline { float:left; padding: 100px; padding-left: 200px; }
+            body {margin:0;}
+            ul { list-style-type: none; margin: 0; padding: 0; overflow: hidden;
+                background-color: #900139; position: fixed; top: 0; width: 100%; }
+            li a { display: block; color: white; text-align: center;
+                padding: 14px 16px; text-decoration: none; }
+            li { float: left; }
+            li a:hover { background-color: #888; color: white; }
+            .active { background-color: #900139; }
+            input[type=button], input[type=submit], input[type=reset] {
+                background-color: #900139; border: none; color: white; padding: 16px 32px;
+                text-decoration: none; margin: 4px 2px; cursor: pointer; }
+        </style>
+    </head>
+    <body>
+        <div>
+            <ul>
+                <li><a class="active" href="{{ url_for('home') }}">Home</a></li>
+                {% if current_user.is_anonymous %}
+                <li><a class="active" href="{{ url_for('login') }}">Login</a></li>
+                <li><a class="active" href="{{ url_for('register') }}">Sign up</a></li>
+                {% else %}
+                <li><a class="active" href="{{ url_for('createTopic') }}">Create New Topic</a></li>
+                <li><a class="active" href="{{ url_for('createGroup') }}">Create New Group</a></li>
+                <li><a class="active" href="{{ url_for('myGroups') }}">My Groups</a></li>
+                <li><a class="active" href="{{ url_for('logout') }}">Logout</a></li>
+		<li><a class="active" href="{{ url_for('myProfile') }}">Profile</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </body>
+</html>

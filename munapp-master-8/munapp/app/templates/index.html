@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+
+{% block extend_content %}
+    <div class ="jumbotron">
+        <h1 class="display-3">Welcome to MUNAPP, {{ current_user.username }}</h1>
+	<p class="lead">MUNAPP is an app developed by Group C of COMP 2005 with Dr. Brown. It's purpose is to give a platform to students for sharing tools and resources found to be useful throughout the course</p>
+	<p><a class="btn btn-lg btn-success" href="http://www.cs.mun.ca/~brown/cs2005/" target="_blank">Course Webpage &raquo;</a></p>
+        </div>
+    </div>
+    <div class ="container">
+	<div class ="row">
+		<div class ="col-md-8">
+			<div class = "well">
+			    <h1>Recent Topics</h1>
+			    {% for topic in topics | reverse %}
+				<div class = "well">
+				    <div><a class="active" href="{{ url_for('viewTopic',id=topic.id )}}">{{topic.title}}</a></p></div>
+				    <div><sub><p>submitted on {{topic.timestamp}} by <b><a class="active" href="{{ url_for('generalProfile',id=topic.user_id )}}"> {{ topic.author.username }}</b> </a></div></sub>
+				    
+				</div>
+			    {% endfor %}   
+			</div>    
+	    	</div>
+		<div class="col-md-4">
+            		<div class = "row">
+                		<div class ="well">
+                    			<p><a class="btn btn-primary" href="{{url_for('myProfile')}}"> Notifications <span class="badge">{{ numNots }}</span></a></p><br>
+					<h4>Active Groups</h4>
+						{% for group in current_user.groups %}
+                					<p><a class="btn btn-default" href="{{ url_for('viewGroup',id=group.id )}}">{{group.name}}</a></p>
+            					{% endfor %}
+                		</div>
+            		</div>
+		</div>
+	  </div>
+	</div>    
+{% endblock %}

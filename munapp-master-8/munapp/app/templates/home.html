@@ -1,0 +1,62 @@
+
+{% extends "base.html" %}
+
+{% block extend_content %}
+<div class="container">
+    <div class ="row">
+        <div class ="col-md-6">
+            <div class = "well">
+                <div class="inline">
+                    <h1>Sign In</h1>
+                    <form action="{{ url_for('login') }}" method="post">
+                        {{ loginForm.hidden_tag() }}
+                        <p>
+                            <div style="width: 50%">
+                                {{ wtf.form_field(loginForm.username) }}
+                            </div>
+                        </p>
+                        <p>
+                            <div style="width: 50%">
+                                {{ wtf.form_field(loginForm.password)}}
+                            </div>
+                        </p>
+                        <p>{{ wtf.form_field(loginForm.remember_me) }}</p>
+                        <p>{{ wtf.form_field(loginForm.submit) }}</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class ="col-md-6">
+            <div class = "well">
+                <div class="inline">
+                    <h1>Register</h1>
+                    <form action="{{ url_for('register') }}" method="post">
+                        {{ regForm.hidden_tag() }}
+                        <p>
+                            <div style="width: 50%">
+                                {{ wtf.form_field(regForm.username) }}
+                            </div>
+                        </p>
+                        <p>
+                            <div style="">
+                                {{wtf.form_field(regForm.email) }}
+                            </div>
+                        </p>
+                        <p>
+                            <div style="width: 50%">
+                                {{ wtf.form_field(regForm.password) }}
+                            </div>
+                        </p>
+                        <p>
+                            <div style="width: 50%">
+                                {{ wtf.form_field(regForm.password2) }}<br>
+                            </div>
+                        </p>
+                        <p>{{ wtf.form_field(regForm.submit) }}</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

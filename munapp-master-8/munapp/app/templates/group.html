@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+
+{% block extend_content %}
+<div class = "container">
+    <div class = "well">
+        <h1>Welcome to {{group.name}}</h1>
+    </div>
+</div>
+<div class="container">
+    <div class = "row">
+        <div class ="col-md-8">
+            <div class ="well">
+                <h2>Group Discussions</h2>
+                {% for topic in group.topics | reverse %}
+                    <div class = "well">
+                        <div><p><a class="active" href="{{ url_for('viewTopic',id=topic.id )}}">{{topic.title}}</a></p></div>
+                        <div><sub><p>submitted on {{topic.timestamp}} by <b><a class="active" href="{{ url_for('generalProfile',id=topic.user_id )}}"> {{ topic.author.username }}</b> </a></div></sub>
+                    </div>
+                {% endfor %}   
+                <div><p><a class="btn btn-lg btn-success" href="{{ url_for('createTopic',group_id=group.id)}}">Add New Discussion</a></p></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class = "row">
+                <div class ="well">
+                    <h2>Current Members</h2>
+                        {% for member in group.members %}
+                            <div><p><b><a class="active" href="{{ url_for('generalProfile',id=member.user_id )}}"> {{ member.username }}</b></a></p></div>
+                        {% endfor %}
+                </div>
+            </div>    
+            <div class = "row">
+                <div class ="well">
+                    <div class="well">
+                        <h2>Add new member</h2>
+                        <form class="form form-horizontal" method="post" role="form">
+                            {{form.csrf_token}}
+                            {{wtf.form_field(form.username)}}
+                            {{wtf.form_field(form.submit)}}
+                        </form>
+                    </div>
+                    <div class="well">
+                        <form class="form form-horizontal" method="post" role="form">
+                            {{leaveGroup.csrf_token}}
+                            {{wtf.form_field(leaveGroup.submit)}}
+                        </form>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}                                                    

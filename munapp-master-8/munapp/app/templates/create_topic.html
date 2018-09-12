@@ -1,0 +1,16 @@
+
+{% extends "base.html" %}
+
+{% block extend_content %}
+    <div class="container">
+        <div class="well">
+            <h1>New Topic</h1>
+            <form class="form form-horizontal" method="post" role="form">
+                {{form.csrf_token}}
+                {{wtf.form_field(form.title)}}
+                {{wtf.form_field(form.body)}}
+                {{wtf.form_field(form.submit)}}
+            </form>
+        </div>
+    </div>
+{% endblock %}

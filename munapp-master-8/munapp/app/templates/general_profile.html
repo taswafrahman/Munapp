@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block extend_content %}
+
+<div class="container">
+    <div class ="well">
+	
+	<h1> {{ user.username }}'s Profile </h1>
+	<h1> {{ "User Comments" }} </h1>
+		{% for comment in user.comment | reverse %}
+			<p><a class="active" href="{{ url_for('viewTopic',id=comment.topic_id )}}"> {{ comment.body }}</a> </p>
+		{% endfor %}
+	<h1> {{ "User Posts" }} </h1>
+		{% for topic in user.topic | reverse %}
+			<p><a class="active" href="{{ url_for('viewTopic',id=topic.id )}}">{{ topic.title }} </a></p>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

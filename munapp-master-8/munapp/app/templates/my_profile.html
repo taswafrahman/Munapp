@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block extend_content%}
+<div class="container">
+    <div class ="well">
+        <h1> {{ current_user.username }} </h1>
+        <h1> {{ "My Groups" }} </h1>
+            {% for group in current_user.groups %}
+                <p><a class="active" href="{{ url_for('viewGroup',id=group.id )}}">{{group.name}}</a></p>
+            {% endfor %}
+        <h1> {{ "My Notifications" }} </h1>
+            {% for n in nots %}
+                <p><a class="active" href="{{ url_for('viewTopic',id=n.id )}}">{{n.title}}</a></p>
+            {% endfor %}
+        <h1> {{ "My Comments" }} </h1>
+            {% for comment in current_user.comment | reverse %}
+                <p><a class="active" href="{{ url_for('viewTopic',id=comment.topic_id )}}"> {{ comment.body }}</a> </p>
+            {% endfor %}
+        <h1> {{ "My Posts" }} </h1>
+            {% for topic in current_user.topic | reverse  %}
+                <p><a class="active" href="{{ url_for('viewTopic',id=topic.id )}}"> {{ topic.title }} </a></p>
+            {% endfor %}
+        <h1> {{ "My Subscriptions" }} </h1>
+            {% for s in subs %}
+                <p><a class="active" href="{{ url_for('viewTopic',id=s.id )}}">{{s.title}}</p>
+            {% endfor %}
+    </div>
+</div>
+{% endblock %}

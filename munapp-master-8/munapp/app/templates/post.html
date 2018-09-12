@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block extend_content%}
+<div class="container">
+    <div class ="well">
+		<h1>{{ topic.title }}</h1>
+		<div><p>{{ topic.body }}</p></div>
+		<div><p>{{topic.timestamp}}</p></div>
+        {% if current_user.id == topic.user_id %}
+            <p><a class="btn btn-xs btn-success" href="{{ url_for('editTopic',id=topic.id )}}">Edit Topic</a></p>
+        {% endif %}
+		<form action="" method="post">
+		    <input type="hidden" name="btn" value="{{ val }}" />
+		    <p>{{ wtf.form_field(btn.submit) }}</p>
+		</form>
+		<form class="form form-horizontal" method="post" role="form">
+            {{form.csrf_token}}
+            {{wtf.form_field(form.comment)}}
+            {{wtf.form_field(form.submit)}}
+        </form>
+		{% for comment in topic.comments | reverse %}
+            <div class ="well">  
+		<p>{{ comment.body }}</p>
+		<div><sub><p>submitted on {{comment.timestamp}} by <b><a class="active" href="{{ url_for('generalProfile',id=comment.user_id )}}"> {{ comment.author.username }}</b> </a></div></sub>
+		
+                {% if current_user.id == comment.user_id %}
+                    <p><a class="btn btn-xs btn-success" href="{{ url_for('editComment',id=comment.id )}}">Edit Comment</a></p>
+                {% endif %}
+		
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
